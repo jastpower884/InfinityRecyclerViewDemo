@@ -1,4 +1,4 @@
-package com.yx.ub8.ui.lobby.view.component
+package com.jastzeonic.infinityrecyclerviewdemo.component
 
 //import android.support.v7.widget.LinearLayoutManager
 //import android.support.v7.widget.RecyclerView
