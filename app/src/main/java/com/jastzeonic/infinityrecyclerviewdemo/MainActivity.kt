@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
+import com.jastzeonic.infinityrecyclerviewdemo.component.IndicatorScrollerListener
 import com.jastzeonic.infinityrecyclerviewdemo.component.InfinityRecycleViewAdapter
 import com.jastzeonic.infinityrecyclerviewdemo.model.ImageModel
 import com.jastzeonic.infinityrecyclerviewdemo.component.MarginDecoration
@@ -36,14 +37,17 @@ class MainActivity : AppCompatActivity() {
 
         val offset = marginDecoration.getSideVisibleWidth()
 
-        linearLayoutManager.scrollToPositionWithOffset(currentPosition,offset)
+        linearLayoutManager.scrollToPositionWithOffset(currentPosition, offset)
+        pageIndicatorView.count = list.size
+        recyclerView.addOnScrollListener(IndicatorScrollerListener(marginDecoration, pageIndicatorView))
 
-        recyclerView.post{
+
+        recyclerView.post {
             val galleryScrollerListener = WheelAnimationScrollerListener(marginDecoration.mItemConsumeX)
 
             recyclerView.addOnScrollListener(galleryScrollerListener)
 
-            galleryScrollerListener.setBottomToTopAnim(recyclerView,currentPosition,0f)
+            galleryScrollerListener.setBottomToTopAnim(recyclerView, currentPosition, 0f)
 
             galleryScrollerListener.updatePosition(currentPosition)
 
@@ -52,11 +56,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getImageList() = mutableListOf(
-            ImageModel("A", R.drawable.photo_1),
-            ImageModel("B", R.drawable.photo_2),
-            ImageModel("C", R.drawable.photo_3),
-            ImageModel("D", R.drawable.photo_4),
-            ImageModel("E", R.drawable.photo_5)
+        ImageModel("A", R.drawable.photo_1),
+        ImageModel("B", R.drawable.photo_2),
+        ImageModel("C", R.drawable.photo_3),
+        ImageModel("D", R.drawable.photo_4),
+        ImageModel("E", R.drawable.photo_5)
 
     )
 
